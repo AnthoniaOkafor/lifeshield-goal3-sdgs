@@ -1,0 +1,22 @@
+{% block blogsidebar %}
+
+<style>
+        .card{
+            box-shadow: 0 16px 48px #E3E7EB;
+        }
+       
+</style>
+
+<!-- Sidebar Widgets Column -->
+<div class="col-md-4 right ">
+<div class="card my-4">
+        <h5 class="card-header">More Information</h5>
+    <div class="card-body">
+        <p class="card-text"> Are you a victim of an accident, or witnessed one? It is our collective responsibility to report it </p>
+        <a href="{% url 'incident_create' %}"
+           class="btn btn-danger">Make a report</a>
+    </div>
+</div>
+</div>
+
+{% endblock blogsidebar %}

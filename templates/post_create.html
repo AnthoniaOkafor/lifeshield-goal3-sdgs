@@ -1,0 +1,35 @@
+{% extends "base.html" %} 
+
+{% load bootstrap4 %}       {# import bootstrap4 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+
+{% load static %}
+{% block content %}
+
+<div class="container mt-5 mb-2">
+    <h3 class="text-primary">What is happening?</h3>
+    <br/>
+<div>
+    <div class="text-success">
+            {% for message in messages %}
+            <h3> {{message}}</h3>
+            {% endfor %}
+
+    </div>
+    <form method="POST" enctype="multipart/form-data"> 
+    
+        <!-- Security token -->
+        {% csrf_token %} 
+    
+        <!-- Wont be using the formset 
+        {{ form.as_p }} -->
+
+        {% bootstrap_form form %}
+        
+        {% buttons %}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+        {% endbuttons %} 
+    </form> 
+</div>
+{% endblock %}

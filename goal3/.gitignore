@@ -1,0 +1,14 @@
+# FILES
+**/**/.pyc
+.DS_Store
+.env
+local_settings.py
+production_settings.py
+db.txt
+local.dump
+
+# DIRECTORIES
+**/**/__pycache__
+.vscode/
+.pytest_cache
+src.egg-info

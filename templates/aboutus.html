@@ -1,0 +1,50 @@
+{% extends "base.html" %} 
+
+{% load static %}
+{% block content %}
+
+<header class="jumbotron">
+    <div class="container">
+        <div class="row row-header">
+            <div class="col-12">
+                    <h2> We help you get help. </h2>
+                     <p> Find the Nearest Police Station, Hotel and Hospital. </p>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container">
+    <div class="direction-container">
+    <div class="row mt-5 mb-2">
+        <div class="col-md-6" >
+           <h3>We are a humanitarian link <br> between the digital world <br> and disaster response.</h3><br>
+           <div>
+                <p class="text-justify">LifeShield <i>Created for Accident Emergency purpose </i> 
+                    is a social road accident response web-based application. Our functionalities are: To provide real-time information on road accidents, 
+                    to alert road users of accident-prone areas as well as danger-zones whilst on the road, to enable accidents to be reported to appropriate authorities 
+                    and / or response teams, and to help authorities and / or respond teams respond to accidents and monitor occurrences.
+                </p>
+           </div>
+        </div>
+        <div class="col-md-6 mt-sm-3 mb-sm-3">
+            <img src="{% static 'img/app2.png' %}" alt="">
+        </div>
+        <div class="col-md-6 mb-sm-3">
+           <div><h4 id="help">NEED help? <br> LIFESHIELD HAS COME TO HELP</h4> <br> </div>
+           <h4>Click the button below to find the nearest hospital, police station or Hotel</h4> <br>
+           <button class="btn btn-primary" type="submit">Find Location</button>
+           <button class="btn btn-primary" type="submit"><a href="{% url 'incident_create' %}" class="text-decoration-none text-white">Report Accident</a></button>
+           <button class="btn btn-primary" type="submit"><a href="{% url 'search_responses' %}" class="text-decoration-none text-white">Respond to Accident</a></button>
+        </div>
+    </div>
+
+        
+    </div>
+</div>
+</div> 
+
+
+{%endblock%}
