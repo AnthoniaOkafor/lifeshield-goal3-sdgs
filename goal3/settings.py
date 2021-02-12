@@ -29,8 +29,10 @@ dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
-# Update secret key for production
+# Update secret key for development
 #SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+
+# Update secret key for production
 SECRET_KEY = os.environ.get('SECRET_KEY')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
@@ -60,6 +62,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'bootstrap_datepicker_plus',
     'tz_detect',
+    'multiselectfield',
 
     #apps should be defined here
     'projectapps.usersapp',

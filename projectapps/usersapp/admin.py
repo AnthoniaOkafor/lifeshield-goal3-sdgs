@@ -11,6 +11,8 @@ class PostAdmin (admin.ModelAdmin):
 
 admin.site.register(Post, PostAdmin)
 
+# http://127.0.0.1:8000/admin/index/login/?next=/admin/index/
+
 '''
 class PostAdmin (admin.ModelAdmin):
     prepopulated_fields = {'slug': ('content',)}
