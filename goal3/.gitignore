@@ -1,8 +1,0 @@
-# FILES
-.env
-db.txt
-local.dump
-
-# DIRECTORIES
-src.egg-info
-**/**/__pycache__
