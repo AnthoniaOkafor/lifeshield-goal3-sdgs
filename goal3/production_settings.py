@@ -8,6 +8,9 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
+import django_on_heroku
+
+import dj_database_url
 
 import os
 
@@ -26,18 +29,28 @@ dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
-# Update secret key
-SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+# Update secret key for development
+#SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+
+# Update secret key for production
+SECRET_KEY = os.environ.get('SECRET_KEY')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'sdgs-goal3-lifeshield.heroku.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'lifeshield-sdgs-goal3.heroku.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    #apps for production
+    'whitenoise.runserver_nostatic',
+
    # 'usersapp.apps.UsersappConfig', # correct usage is beneath
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,10 +62,12 @@ INSTALLED_APPS = [
     'bootstrap4',
     'bootstrap_datepicker_plus',
     'tz_detect',
+    'multiselectfield',
 
     #apps should be defined here
     'projectapps.usersapp',
     'projectapps.myblog',
+
 ]
 
 # Creating Bootstrap4 block and turning jquery to true
@@ -64,6 +79,11 @@ import django
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    
+    #for production
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # whitenoise for production ends here
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -71,7 +91,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'tz_detect.middleware.TimezoneMiddleware',
+
+    
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 ROOT_URLCONF = 'goal3.urls'
 
@@ -111,8 +136,11 @@ DATABASES = {
     }
 }
 
+db_from_env = dj_database_url.config(conn_max_age = 600)
+DATABASES['default'].update(db_from_env)
+
 # Password validation
-# https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/3.0/ref/settin gs/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -157,3 +185,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 #Media files
 MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
 MEDIA_URL= "/media/"
+
+# Activate Django-Heroku.
+django_on_heroku.settings(locals())
